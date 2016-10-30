@@ -420,7 +420,7 @@ jQuery(function(){
             var count = count + 1;
        document.getElementById('remove_from'+count).innerHTML = "Path from " + graph.edges[i].source.id;
        document.getElementById('remove_from'+count).style.visibility = "visible";
-       from.push(graph.edges[i].target.id)
+       from.push(graph.edges[i].source.id)
         }
       }
    for (var i = count+1; i <= 5; i++) {
@@ -432,9 +432,7 @@ jQuery(function(){
   document.getElementById('remove_to'+i).style.visibility = "hidden";
   document.getElementById('remove_from'+i).style.visibility = "hidden";
 }}, 7000);
-}    
-
-  });
+}});
 });
 
 
@@ -463,6 +461,9 @@ function removing_edges_to (num){
 
 function removing_edges_from (num){
      for (var i = 0; i < graph.edges.length; i++) {
+      console.log(i);
+      console.log(focus.id);
+      console.log(from);
      if (graph.edges[i].source.id == from[num-1] & graph.edges[i].target.id == focus.id) {
     graph.edges.splice(i,1);
 }}}
