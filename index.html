@@ -302,19 +302,29 @@ function closebox(){
 <button class="button_d" style="vertical-align:middle" onclick="decr()"><span>down</span></button>
 <br>
 
-<button class='button_drop' id='remove_from5' style="vertical-align:middle" onclick="removing_edges_from(5)">E1</button> 
-<button class='button_drop' id='remove_from4' style="vertical-align:middle" onclick="removing_edges_from(4)">E2</button> 
-<button class='button_drop' id='remove_from3' style="vertical-align:middle" onclick="removing_edges_from(3)">E3</button> 
-<button class='button_drop' id='remove_from2' style="vertical-align:middle" onclick="removing_edges_from(2)">E4</button>
-<button class='button_drop' id='remove_from1' style="vertical-align:middle" onclick="removing_edges_from(1)">E4</button>
+<button class='button_drop' id='remove_from10' style="vertical-align:middle" onclick="removing_edges_from(5)"></button> 
+<button class='button_drop' id='remove_from9' style="vertical-align:middle" onclick="removing_edges_from(4)"></button> 
+<button class='button_drop' id='remove_from8' style="vertical-align:middle" onclick="removing_edges_from(3)"></button> 
+<button class='button_drop' id='remove_from7' style="vertical-align:middle" onclick="removing_edges_from(2)"></button>
+<button class='button_drop' id='remove_from6' style="vertical-align:middle" onclick="removing_edges_from(1)"></button>
+<button class='button_drop' id='remove_from5' style="vertical-align:middle" onclick="removing_edges_from(5)"></button> 
+<button class='button_drop' id='remove_from4' style="vertical-align:middle" onclick="removing_edges_from(4)"></button> 
+<button class='button_drop' id='remove_from3' style="vertical-align:middle" onclick="removing_edges_from(3)"></button> 
+<button class='button_drop' id='remove_from2' style="vertical-align:middle" onclick="removing_edges_from(2)"></button>
+<button class='button_drop' id='remove_from1' style="vertical-align:middle" onclick="removing_edges_from(1)"></button>
 
-<button class='button_drop' id='remove_node' style="vertical-align:middle" onclick="remove()">Loading</button> 
+<button class='button_drop' id='remove_node' style="vertical-align:middle" onclick="remove()" syle="font: bold 14px"><b><font id = 'remove_node_text' size = 3 > </font></b></button> 
 
-<button class='button_drop' id='remove_to1' style="vertical-align:middle" onclick="removing_edges_to(1)">E1</button> 
-<button class='button_drop' id='remove_to2' style="vertical-align:middle" onclick="removing_edges_to(2)">E2</button> 
-<button class='button_drop' id='remove_to3' style="vertical-align:middle" onclick="removing_edges_to(3)">E3</button> 
-<button class='button_drop' id='remove_to4' style="vertical-align:middle" onclick="removing_edges_to(4)">E4</button>
-<button class='button_drop' id='remove_to5' style="vertical-align:middle" onclick="removing_edges_to(5)">E4</button>
+<button class='button_drop' id='remove_to1' style="vertical-align:middle" onclick="removing_edges_to(1)"></button> 
+<button class='button_drop' id='remove_to2' style="vertical-align:middle" onclick="removing_edges_to(2)"></button> 
+<button class='button_drop' id='remove_to3' style="vertical-align:middle" onclick="removing_edges_to(3)"></button> 
+<button class='button_drop' id='remove_to4' style="vertical-align:middle" onclick="removing_edges_to(4)"></button>
+<button class='button_drop' id='remove_to5' style="vertical-align:middle" onclick="removing_edges_to(5)"></button>
+<button class='button_drop' id='remove_to6' style="vertical-align:middle" onclick="removing_edges_to(6)"></button> 
+<button class='button_drop' id='remove_to7' style="vertical-align:middle" onclick="removing_edges_to(7)"></button> 
+<button class='button_drop' id='remove_to8' style="vertical-align:middle" onclick="removing_edges_to(8)"></button> 
+<button class='button_drop' id='remove_to9' style="vertical-align:middle" onclick="removing_edges_to(9)"></button>
+<button class='button_drop' id='remove_to10' style="vertical-align:middle" onclick="removing_edges_to(10)"></button>
 
 </header>
 <article class="article">
@@ -325,7 +335,7 @@ function closebox(){
 
 <script>
 document.getElementById("remove_node").style.visibility = "hidden";
-for (var i = 1; i <= 5; i++) {
+for (var i = 1; i <= 10; i++) {
 document.getElementById("remove_from"+i).style.visibility = "hidden";
 document.getElementById("remove_to"+i).style.visibility = "hidden";
 }
@@ -390,6 +400,20 @@ option_update();
 save();
 }
 
+var timer;
+
+function timerfunction() {
+    timer =   setTimeout( function() {
+  document.getElementById('remove_node').style.visibility = "hidden";
+  for (var i = 1; i <= 10; i++) {
+  document.getElementById('remove_to'+i).style.visibility = "hidden";
+  document.getElementById('remove_from'+i).style.visibility = "hidden";
+}}, 7000);
+}
+
+function timerstopfunction() {
+    clearTimeout(timer);
+}
 
 jQuery(function(){
   var springy = window.springy = jQuery('#springydemo').springy({
@@ -397,8 +421,12 @@ jQuery(function(){
     nodeSelected: function(node){
       window.focus = node;
       console.log(focus);
-     document.getElementById('remove_node').innerHTML = 'Variable ' + node.id;
+     document.getElementById('remove_node_text').innerHTML = node.id;
      document.getElementById("remove_node").style.visibility = "visible";
+
+   for (var i = 1; i <= 10; i++) {
+       document.getElementById('remove_from'+i).style.visibility = "hidden";
+}
 
      var count = 0; 
      window.to = [];
@@ -406,7 +434,7 @@ jQuery(function(){
    for (var i = 0; i < graph.edges.length; i++) {
           if (graph.edges[i].source.id === node.id) {
             var count = count + 1;
-       document.getElementById('remove_to'+count).innerHTML = "Path to " + graph.edges[i].target.id;
+       document.getElementById('remove_to'+count).innerHTML = "→ " + graph.edges[i].target.id;
        document.getElementById('remove_to'+count).style.visibility = "visible";
        to.push(graph.edges[i].target.id)
         }
@@ -418,20 +446,13 @@ jQuery(function(){
    for (var i = 0; i < graph.edges.length; i++) {
           if (graph.edges[i].target.id === node.id) {
             var count = count + 1;
-       document.getElementById('remove_from'+count).innerHTML = "Path from " + graph.edges[i].source.id;
+       document.getElementById('remove_from'+count).innerHTML = graph.edges[i].source.id + " →";
        document.getElementById('remove_from'+count).style.visibility = "visible";
        from.push(graph.edges[i].source.id)
         }
       }
-   for (var i = count+1; i <= 5; i++) {
-       document.getElementById('remove_from'+i).style.visibility = "hidden";
-}
-  setTimeout( function() {
-  document.getElementById('remove_node').style.visibility = "hidden";
-  for (var i = 1; i <= 5; i++) {
-  document.getElementById('remove_to'+i).style.visibility = "hidden";
-  document.getElementById('remove_from'+i).style.visibility = "hidden";
-}}, 7000);
+timerstopfunction();
+timerfunction();
 }});
 });
 
@@ -461,9 +482,6 @@ function removing_edges_to (num){
 
 function removing_edges_from (num){
      for (var i = 0; i < graph.edges.length; i++) {
-      console.log(i);
-      console.log(focus.id);
-      console.log(from);
      if (graph.edges[i].source.id == from[num-1] & graph.edges[i].target.id == focus.id) {
     graph.edges.splice(i,1);
 }}}
