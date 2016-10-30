@@ -211,7 +211,7 @@ crtl+r to restart
 </font></p>
 <p align="center">
 <font size = "20" face="Helvetica"><b>Causalify 0.3</b></font> <br>
-<font size = "4" face="Helvetica"> <i>A processing tool for researchers to assume causal structures in new research fields using DAGs</i> </font>  </p>
+<font size = "4" face="Helvetica"> <i>A processing tool for researchers to assume causal structures in new research fields</i> </font>  </p>
 
 
 
@@ -301,8 +301,20 @@ function closebox(){
 <font size = "2" face="Helvetica">or</font>
 <button class="button_d" style="vertical-align:middle" onclick="decr()"><span>down</span></button>
 <br>
-<button class='button_drop' id='remove_node' style="vertical-align:middle" onclick="remove()">Loading</button> <br>
 
+<button class='button_drop' id='remove_from5' style="vertical-align:middle" onclick="removing_edges_from(5)">E1</button> 
+<button class='button_drop' id='remove_from4' style="vertical-align:middle" onclick="removing_edges_from(4)">E2</button> 
+<button class='button_drop' id='remove_from3' style="vertical-align:middle" onclick="removing_edges_from(3)">E3</button> 
+<button class='button_drop' id='remove_from2' style="vertical-align:middle" onclick="removing_edges_from(2)">E4</button>
+<button class='button_drop' id='remove_from1' style="vertical-align:middle" onclick="removing_edges_from(1)">E4</button>
+
+<button class='button_drop' id='remove_node' style="vertical-align:middle" onclick="remove()">Loading</button> 
+
+<button class='button_drop' id='remove_to1' style="vertical-align:middle" onclick="removing_edges_to(1)">E1</button> 
+<button class='button_drop' id='remove_to2' style="vertical-align:middle" onclick="removing_edges_to(2)">E2</button> 
+<button class='button_drop' id='remove_to3' style="vertical-align:middle" onclick="removing_edges_to(3)">E3</button> 
+<button class='button_drop' id='remove_to4' style="vertical-align:middle" onclick="removing_edges_to(4)">E4</button>
+<button class='button_drop' id='remove_to5' style="vertical-align:middle" onclick="removing_edges_to(5)">E4</button>
 
 </header>
 <article class="article">
@@ -313,6 +325,10 @@ function closebox(){
 
 <script>
 document.getElementById("remove_node").style.visibility = "hidden";
+for (var i = 1; i <= 5; i++) {
+document.getElementById("remove_from"+i).style.visibility = "hidden";
+document.getElementById("remove_to"+i).style.visibility = "hidden";
+}
 
 var graph = new Springy.Graph();
 
@@ -374,22 +390,53 @@ option_update();
 save();
 }
 
+
 jQuery(function(){
   var springy = window.springy = jQuery('#springydemo').springy({
     graph: graph,
     nodeSelected: function(node){
       window.focus = node;
       console.log(focus);
-     document.getElementById('remove_node').innerHTML = 'Remove ' + node.id;
+     document.getElementById('remove_node').innerHTML = 'Variable ' + node.id;
      document.getElementById("remove_node").style.visibility = "visible";
-     setTimeout(set_hidden, 5000)
-    }
+
+     var count = 0; 
+     window.to = [];
+     window.from = [];
+   for (var i = 0; i < graph.edges.length; i++) {
+          if (graph.edges[i].source.id === node.id) {
+            var count = count + 1;
+       document.getElementById('remove_to'+count).innerHTML = "Path to " + graph.edges[i].target.id;
+       document.getElementById('remove_to'+count).style.visibility = "visible";
+       to.push(graph.edges[i].target.id)
+        }
+      }
+   for (var i = count+1; i <= 5; i++) {
+       document.getElementById('remove_to'+i).style.visibility = "hidden";
+}
+    var count = 0; 
+   for (var i = 0; i < graph.edges.length; i++) {
+          if (graph.edges[i].target.id === node.id) {
+            var count = count + 1;
+       document.getElementById('remove_from'+count).innerHTML = "Path from " + graph.edges[i].source.id;
+       document.getElementById('remove_from'+count).style.visibility = "visible";
+       from.push(graph.edges[i].target.id)
+        }
+      }
+   for (var i = count+1; i <= 5; i++) {
+       document.getElementById('remove_from'+i).style.visibility = "hidden";
+}
+  setTimeout( function() {
+  document.getElementById('remove_node').style.visibility = "hidden";
+  for (var i = 1; i <= 5; i++) {
+  document.getElementById('remove_to'+i).style.visibility = "hidden";
+  document.getElementById('remove_from'+i).style.visibility = "hidden";
+}}, 7000);
+}    
+
   });
 });
 
-function set_hidden(){
-     document.getElementById("remove_node").style.visibility = "hidden";
-}
 
 Array.prototype.remByVal = function(val) {
     for (var i = 0; i < this.length; i++) {
@@ -407,6 +454,19 @@ function remove() {
   window.xs.remByVal(focus.id);
   window.ys.remByVal(focus.id);
 }
+
+function removing_edges_to (num){
+     for (var i = 0; i < graph.edges.length; i++) {
+     if (graph.edges[i].source.id == focus.id & graph.edges[i].target.id == to[num-1]) {
+    graph.edges.splice(i,1);
+}}}
+
+function removing_edges_from (num){
+     for (var i = 0; i < graph.edges.length; i++) {
+     if (graph.edges[i].source.id == from[num-1] & graph.edges[i].target.id == focus.id) {
+    graph.edges.splice(i,1);
+}}}
+
 
 function save() {
 console.log(graph.nodes);
