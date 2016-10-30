@@ -205,15 +205,13 @@ footer {background: white;color:black;}
 <div class="flex-container">
 <header>
 <p align="right"> <font size = "2" face="Helvetica">
-Chrome is recommended as browser | crtl+r to restart  
+crtl+r to restart  
 <button class='button_drop' onclick="export_data()"> Export DAG for later use </button> 
 <button class='button_drop' onclick="window.location='mailto:Causalify@gmail.com?Subject=Suggestions for Causalify';"> Suggestions </button> 
 </font></p>
 <p align="center">
 <font size = "20" face="Helvetica"><b>Causalify 0.2</b></font> <br>
 <font size = "4" face="Helvetica"> <i>A processing tool for researchers to assume causal structures in new research fields using DAGs</i> </font>  </p>
-
-
 <div id="popup1" class="overlay">
   <div class="popup">
     <h2>Ever needed a processing tool for visualising causal assumptions</h2>
@@ -233,11 +231,15 @@ Chrome is recommended as browser | crtl+r to restart
   </div>
 </div>
 
+
+
+
 <div id="start" class="overlay">
   <div class="popup">
     <h2>Welcome to Causalify</h2>
-    <a class="close" href="#">&times;</a>
-    <div class="content"><font size = "4" face="Helvetica">
+    <a id = "close_id" class="close" href="#">&times;</a>
+    <div id="chrome_check"><img src="chrome.ico" height="42" width="42"> <br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser for a better experience</font></div>
+    <div id = "intro_text" class="content"><font size = "4" face="Helvetica">
       You now have the following options:</font> <br> <br>
     <button class='button_drop' onclick="closebox()" > 
     <font size = "2" face="Helvetica"> Start from scratch </font></button><br><br>
@@ -245,10 +247,13 @@ Chrome is recommended as browser | crtl+r to restart
     <font size = "2" face="Helvetica"> Load last working session</font></button><br><br>
     <input class='inputfile' type="file" id="csvFileInput" onchange="handleFiles(this.files)"accept=".csv"> </input>   <label for="csvFileInput">  <font size = "2" face="Helvetica"> Load a DAG from your desktop</font></label>
 
+<br>
+     <br></div>
 
-    <br>     <br>     <br>  
+
+     <br>  
     <div class="content">
-     <i><br>
+     <i>
       <font size = "2" face="Helvetica">
   <b>   Ever needed a processing tool for visualising causal assumptions </b> <br><br>
       You, as a researcher, know your research field. However, occasionally you need to understand entirely new fields with its own literature of assumed causal relations. <br><br>
@@ -261,14 +266,13 @@ Chrome is recommended as browser | crtl+r to restart
       Happy research!<br>
       A. Rieckmann, R. Wibæk, and E. Rossing.
     </font> </i>
-    </div>
+
   </div>
 </div>
 </div>
 
 <script>
        window.location = '#start';   
-
 function closebox(){
     window.location = '#';   
 }
@@ -602,7 +606,13 @@ function errorHandler(evt) {
   }
 }
 
+if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 ){
+  document.getElementById("chrome_check").style.visibility = "hidden";
+} else {
+    document.getElementById("intro_text").style.visibility = "hidden";
+    document.getElementById("close_id").style.visibility = "hidden";
 
+}
 
 
 </script>
