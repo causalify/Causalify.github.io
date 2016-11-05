@@ -659,7 +659,7 @@ function downloadFile(data, fileName) {
 }
 
 
-var namedfile = "DAG.csv";
+var namedfile = "Causalify_structure.csv";
 downloadFile(data,namedfile);
 }
 
@@ -735,6 +735,19 @@ function errorHandler(evt) {
   }
 }
 
+function download_image(){
+  var canvas = document.getElementById('springydemo'),
+    ctx = canvas.getContext('2d');
+var dataURL = canvas.toDataURL('image/png');
+            var link = document.createElement("a");
+            link.href = dataURL;
+            link.style = "visibility:hidden";
+            link.download = "Causalify_image.png";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+}
+
 // testing browser and version
 var useragent = navigator.userAgent;
 if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(useragent.lastIndexOf('Chrome/') + 7, 2) >= 54 ){
@@ -766,6 +779,7 @@ if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(
 
 
 <footer>
+  <button class='button_drop' onclick="download_image()"> Download image </button> <br>
 <font size = "1" style="text-decoration: none" face="Helvetica"><a href="#popup1">About the idea</a></font>
 <font size = "1" face="Helvetica">  by A. Rieckmann, R. Wibæk, and E. Rossing. </font> 
 <font size = "1" style="text-decoration: none" face="Helvetica">  Visualisation by <a href = "http://getspringy.com" target="_blank"> Springy.js </a>  </font>
