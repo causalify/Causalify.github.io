@@ -243,7 +243,7 @@ footer {background: white;color:black;}
 <div id="start" class="overlay">
   <div class="popup">
     <h2>Welcome to Causalify</h2>
-    <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser for a better experience</font></div>
+    <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser 54+ for the optimal experience</font></div>
     <div id = "intro_text" class="content"><font size = "4" face="Helvetica">
       You now have the following options:</font> <br> <br>
     <button class='button_drop' onclick="closebox()" > 
@@ -344,8 +344,6 @@ document.getElementById("remove_to"+i).style.visibility = "hidden";
 
 var graph = new Springy.Graph();
 
-window.xs = [];
-window.ys = [];
 window.note = "";
 
 function remove_duplicates_safe(arr) {
@@ -737,7 +735,9 @@ function errorHandler(evt) {
   }
 }
 
-if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 ){
+// testing browser and version
+var useragent = navigator.userAgent;
+if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(useragent.lastIndexOf('Chrome/') + 7, 2) >= 54 ){
   document.getElementById("chrome_check").style.visibility = "hidden";
 } else {
     document.getElementById("intro_text").style.visibility = "hidden";
