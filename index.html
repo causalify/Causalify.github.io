@@ -21,6 +21,12 @@
 
 .article {
     text-align: center;
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      border: 0;
+      overflow: hidden; /*  Disable scrollbars */
+      display: block;  /* No floating content on sides */
 }
 
 header {background: white;color:black;}
@@ -208,7 +214,8 @@ footer {background: white;color:black;}
 <p style="text-align:left;"> <font size = "2" face="Helvetica">
 <button class='button_drop' style  = "visibility:hidden" onclick="undo()" id = "undo_button"> Undo </button>
 <span style="float:right;"> crtl+r to restart  
-<button class='button_drop' onclick="export_data()"> Save </button> 
+<button class='button_drop' onclick="export_data()"> Structure ⇩ </button> 
+<button class='button_drop' onclick="download_image()"> Image ⇩ </button>
 <button class='button_drop' onclick="window.location='mailto:Causalify@gmail.com?Subject=Suggestions for Causalify';"> Suggest ideas </button> 
 </span></font></p>
 <p align="center">
@@ -249,8 +256,8 @@ footer {background: white;color:black;}
     <button class='button_drop' onclick="closebox()" > 
     <font size = "2" face="Helvetica"> Start from scratch </font></button><br><br>
     <button class='button_drop' onclick="loadlastsession()">
-    <font size = "2" face="Helvetica"> Load last used causal structure</font></button><br><br>
-    <input class='inputfile' type="file" id="csvFileInput" onchange="handleFiles(this.files)"accept=".csv"> </input>   <label for="csvFileInput">  <font size = "2" face="Helvetica"> Load causal structure from file</font></label>
+    <font size = "2" face="Helvetica"> Last causal structure</font></button><br><br>
+    <input class='inputfile' type="file" id="csvFileInput" onchange="handleFiles(this.files)"accept=".csv"> </input>   <label for="csvFileInput">  <font size = "2" face="Helvetica"> Load causal structure ⇧</font></label>
 
 <br>
      <br></div>
@@ -772,6 +779,42 @@ if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(
 
 <canvas id="springydemo" width=1100 height="480" />
 
+  <script>
+    (function() {
+      var 
+        // Obtain a reference to the canvas element
+        // using its id.
+        htmlCanvas = document.getElementById('springydemo'),
+      
+          // Obtain a graphics context on the
+          // canvas element for drawing.
+          context = htmlCanvas.getContext('2d');
+ 
+      // Start listening to resize events and
+      // draw canvas.
+      initialize();
+ 
+      function initialize() {
+        // Register an event listener to
+        // call the resizeCanvas() function each time 
+        // the window is resized.
+        window.addEventListener('resize', resizeCanvas, false);
+        
+        // Draw canvas border for the first time.
+        resizeCanvas();
+      }
+        
+    
+      // Runs each time the DOM window resize event fires.
+      // Resets the canvas dimensions to match window,
+      // then draws the new borders accordingly.
+      function resizeCanvas() {
+        htmlCanvas.width = window.innerWidth;
+        htmlCanvas.height = window.innerHeight * .6;
+      }
+    
+    })();
+  </script>
 
 </article>
 
@@ -779,7 +822,6 @@ if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(
 
 
 <footer>
-  <button class='button_drop' onclick="download_image()"> Download image </button> <br>
 <font size = "1" style="text-decoration: none" face="Helvetica"><a href="#popup1">About the idea</a></font>
 <font size = "1" face="Helvetica">  by A. Rieckmann, R. Wibæk, and E. Rossing. </font> 
 <font size = "1" style="text-decoration: none" face="Helvetica">  Visualisation by <a href = "http://getspringy.com" target="_blank"> Springy.js </a>  </font>
