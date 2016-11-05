@@ -205,11 +205,12 @@ footer {background: white;color:black;}
 
 <div class="flex-container">
 <header>
-<p align="right"> <font size = "2" face="Helvetica">
-crtl+r to restart  
+<p style="text-align:left;"> <font size = "2" face="Helvetica">
+<button class='button_drop' style  = "visibility:hidden" onclick="undo()" id = "undo_button"> Undo </button>
+<span style="float:right;"> crtl+r to restart  
 <button class='button_drop' onclick="export_data()"> Download </button> 
 <button class='button_drop' onclick="window.location='mailto:Causalify@gmail.com?Subject=Suggestions for Causalify';"> Suggest ideas </button> 
-</font></p>
+</span></font></p>
 <p align="center">
 <font size = "20" face="Helvetica"><b>Causalify 0.3</b></font> <br>
 <font size = "4" face="Helvetica"> <i>A processing tool for researchers to assume causal structures in new research fields</i> </font>  </p>
@@ -372,18 +373,16 @@ function decr(){
 }
 
 function option_update() {
-  var xys = xs;
-Array.prototype.push.apply(xys, ys);
-var xys = remove_duplicates_safe(xys);
 var options = '';
-for(var i = 0; i < xys.length; i++) {
-options += '<option value="'+xys[i]+'" />';
+for(var i = 0; i < graph.nodes.length; i++) {
+options += '<option value="'+graph.nodes[i].id+'" />';
 }
 document.getElementById('xs_list').innerHTML = options;
 document.getElementById('ys_list').innerHTML = options;
 }
 
 function update(){
+  save_undo();
   var author = document.getElementById('author').value
   var x = document.getElementById('x').value
   var y = document.getElementById('y').value
@@ -399,7 +398,15 @@ if (ys.indexOf(y) == -1) {
 graph.addEdges([x,y,{color: col,label: author}]);
 option_update();
 save();
+//document.getElementById('undo_button').style.visibility = "visible";
 }
+
+function undo(){
+load_undo();
+option_update();
+document.getElementById('undo_button').style.visibility = "hidden";
+}
+
 
 var timer;
 
@@ -486,7 +493,7 @@ save();
 function removing_edges_to (num){
      for (var i = 0; i < graph.edges.length; i++) {
      if (graph.edges[i].source.id == focus.id & graph.edges[i].target.id == to[num-1]) {
-    graph.edges.splice(i,1);
+      graph.removeEdge(graph.edges[i]);
 }}
 save();
 }
@@ -494,7 +501,7 @@ save();
 function removing_edges_from (num){
      for (var i = 0; i < graph.edges.length; i++) {
      if (graph.edges[i].source.id == from[num-1] & graph.edges[i].target.id == focus.id) {
-    graph.edges.splice(i,1);
+      graph.removeEdge(graph.edges[i]);
 }}
 save();
 }
@@ -526,6 +533,24 @@ localStorage.setItem("stored_colors", JSON.stringify(color_list));
 localStorage.setItem("stored_authors", JSON.stringify(author_list));
 }
 
+function save_undo() {
+var nodes_list = [];
+for (var i = 0; i < graph.nodes.length; i++) {
+nodes_list.push(graph.nodes[i].id);
+}
+localStorage.setItem("stored_nodes_undo", JSON.stringify(nodes_list));
+// Edges
+var source_list = [];
+var target_list = [];
+for (var i = 0; i < graph.edges.length; i++) {
+source_list.push(graph.edges[i].source.id);
+target_list.push(graph.edges[i].target.id);
+}
+localStorage.setItem("stored_sources_undo", JSON.stringify(source_list));
+localStorage.setItem("stored_targets_undo", JSON.stringify(target_list));
+}
+
+
 function loadlastsession() {
 window.xys = [];
 // nodes
@@ -547,22 +572,39 @@ graph.addEdges([source_list[i],target_list[i],{color: color_list[i],label: autho
 }
 }
 // update options
-var options = '';
-for(var i = 0; i < xys.length; i++) {
-options += '<option value="'+xys[i]+'" />';
-}
-document.getElementById('xs_list').innerHTML = options;
-document.getElementById('ys_list').innerHTML = options;
+option_update();
 //#### after loading
 closebox();
 }
 
-function clearing(){
-console.log("clear");
-localStorage.removeItem("stored_nodes");
-localStorage.removeItem("stored_sources");
-localStorage.removeItem("stored_targets");
+function load_undo() {
+var nodes_list = JSON.parse( localStorage.getItem("stored_nodes_undo") );
+console.log(nodes_list);
+for (var i = 0; i < graph.nodes.length; i++) {
+console.log(graph.nodes[i].id);
+x = 0;
+for (var g = 0; g < nodes_list.length; g++) {
+if (graph.nodes[i].id === nodes_list[g]) {
+  x = 1;
+}}
+if (x === 0){
+  graph.removeNode(graph.nodes[i]);
+} 
 }
+/*
+var source_list = JSON.parse( localStorage.getItem("stored_sources_undo") );
+var target_list = JSON.parse( localStorage.getItem("stored_targets_undo") );
+for (var i = 0; i < nodes_list; i++) {
+  x = -1
+    console.log(nodes_list[i]);
+  for (var g = 0; g < graph.nodes.length; g++) {
+  console.log(nodes_list[i]);
+  console.log(grap.nodes[g].id);
+}
+}
+*/
+}
+
 
 function export_data(){
 console.log(graph);
@@ -592,7 +634,7 @@ function downloadFile(data, fileName) {
             var csvContent = "";
 
           data.forEach(function (infoArray, index) {
-              dataString = infoArray.join(",");
+              dataString = infoArray.join(";");
               csvContent += dataString + "\n";
           });
           console.log(csvContent);
@@ -660,17 +702,15 @@ function processData(csv) {
     var allTextLines = csv.split(/\r\n|\n/);
     var lines = [];
     while (allTextLines.length) {
-        lines.push(allTextLines.shift().split(','));
+        lines.push(allTextLines.shift().split(';'));
     }
   window.data = lines;
   console.log(data);
-  window.xys = [];
 // nodes
 var nodes_list = getCol(data,0);
 console.log(nodes_list);
 for (var i = 0; i < nodes_list.length; i++) {
 graph.addNodes(nodes_list[i]);
-window.xys.push(nodes_list[i]);
 }
 // edges
 var source_list = getCol(data,1);
@@ -685,12 +725,7 @@ for (var i = 0; i < source_list.length; i++) {
 graph.addEdges([source_list[i],target_list[i],{color: color_list[i],label: author_list[i]}]);
 }
 // update options
-var options = '';
-for(var i = 0; i < xys.length; i++) {
-options += '<option value="'+xys[i]+'" />';
-}
-document.getElementById('xs_list').innerHTML = options;
-document.getElementById('ys_list').innerHTML = options;
+option_update();
 //#### after loading
 closebox();
 save();
@@ -733,7 +768,7 @@ if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 ){
 <footer>
 <font size = "1" style="text-decoration: none" face="Helvetica"><a href="#popup1">About the idea</a></font>
 <font size = "1" face="Helvetica">  by A. Rieckmann, R. Wibæk, and E. Rossing. </font> 
-<font size = "1" style="text-decoration: none" face="Helvetica">  Visualisation by <a href = "http://getspringy.com"> Springy.js </a>  </font>
+<font size = "1" style="text-decoration: none" face="Helvetica">  Visualisation by <a href = "http://getspringy.com" target="_blank"> Springy.js </a>  </font>
 </footer>
 
 
