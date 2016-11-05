@@ -208,7 +208,7 @@ footer {background: white;color:black;}
 <p style="text-align:left;"> <font size = "2" face="Helvetica">
 <button class='button_drop' style  = "visibility:hidden" onclick="undo()" id = "undo_button"> Undo </button>
 <span style="float:right;"> crtl+r to restart  
-<button class='button_drop' onclick="export_data()"> Download </button> 
+<button class='button_drop' onclick="export_data()"> Save </button> 
 <button class='button_drop' onclick="window.location='mailto:Causalify@gmail.com?Subject=Suggestions for Causalify';"> Suggest ideas </button> 
 </span></font></p>
 <p align="center">
@@ -243,7 +243,7 @@ footer {background: white;color:black;}
 <div id="start" class="overlay">
   <div class="popup">
     <h2>Welcome to Causalify</h2>
-    <div id="chrome_check"><img src="chrome.ico" height="42" width="42"> <br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser for a better experience</font></div>
+    <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser for a better experience</font></div>
     <div id = "intro_text" class="content"><font size = "4" face="Helvetica">
       You now have the following options:</font> <br> <br>
     <button class='button_drop' onclick="closebox()" > 
@@ -303,29 +303,29 @@ function closebox(){
 <button class="button_d" style="vertical-align:middle" onclick="decr()"><span>down</span></button>
 <br>
 <font id='remove_text' onclick="removing_text" size = "2" face="Helvetica" color = "grey">Remove <font size = "3"> <b>node</b> </font> or →path→</font> 
-<button class='button_drop' id='remove_from10' style="vertical-align:middle" onclick="removing_edges_from(5)"></button> 
-<button class='button_drop' id='remove_from9' style="vertical-align:middle" onclick="removing_edges_from(4)"></button> 
-<button class='button_drop' id='remove_from8' style="vertical-align:middle" onclick="removing_edges_from(3)"></button> 
-<button class='button_drop' id='remove_from7' style="vertical-align:middle" onclick="removing_edges_from(2)"></button>
-<button class='button_drop' id='remove_from6' style="vertical-align:middle" onclick="removing_edges_from(1)"></button>
-<button class='button_drop' id='remove_from5' style="vertical-align:middle" onclick="removing_edges_from(5)"></button> 
-<button class='button_drop' id='remove_from4' style="vertical-align:middle" onclick="removing_edges_from(4)"></button> 
-<button class='button_drop' id='remove_from3' style="vertical-align:middle" onclick="removing_edges_from(3)"></button> 
-<button class='button_drop' id='remove_from2' style="vertical-align:middle" onclick="removing_edges_from(2)"></button>
-<button class='button_drop' id='remove_from1' style="vertical-align:middle" onclick="removing_edges_from(1)"></button>
+<button class='button_drop' id='remove_from10' style  = "visibility:hidden"  onclick="removing_edges_from(5)"></button> 
+<button class='button_drop' id='remove_from9' style  = "visibility:hidden" onclick="removing_edges_from(4)"></button> 
+<button class='button_drop' id='remove_from8' style  = "visibility:hidden" onclick="removing_edges_from(3)"></button> 
+<button class='button_drop' id='remove_from7' style  = "visibility:hidden" onclick="removing_edges_from(2)"></button>
+<button class='button_drop' id='remove_from6' style  = "visibility:hidden" onclick="removing_edges_from(1)"></button>
+<button class='button_drop' id='remove_from5' style  = "visibility:hidden" onclick="removing_edges_from(5)"></button> 
+<button class='button_drop' id='remove_from4' style  = "visibility:hidden" onclick="removing_edges_from(4)"></button> 
+<button class='button_drop' id='remove_from3' style  = "visibility:hidden" onclick="removing_edges_from(3)"></button> 
+<button class='button_drop' id='remove_from2' style  = "visibility:hidden" onclick="removing_edges_from(2)"></button>
+<button class='button_drop' id='remove_from1' style  = "visibility:hidden" onclick="removing_edges_from(1)"></button>
 
-<button class='button_drop' id='remove_node' style="vertical-align:middle" onclick="remove()" syle="font: bold 14px"><b><font id = 'remove_node_text' size = 3 > </font></b></button> 
+<button class='button_drop' id='remove_node' style  = "visibility:hidden" onclick="remove()" syle="font: bold 14px"><b><font id = 'remove_node_text' size = 3 > </font></b></button> 
 
-<button class='button_drop' id='remove_to1' style="vertical-align:middle" onclick="removing_edges_to(1)"></button> 
-<button class='button_drop' id='remove_to2' style="vertical-align:middle" onclick="removing_edges_to(2)"></button> 
-<button class='button_drop' id='remove_to3' style="vertical-align:middle" onclick="removing_edges_to(3)"></button> 
-<button class='button_drop' id='remove_to4' style="vertical-align:middle" onclick="removing_edges_to(4)"></button>
-<button class='button_drop' id='remove_to5' style="vertical-align:middle" onclick="removing_edges_to(5)"></button>
-<button class='button_drop' id='remove_to6' style="vertical-align:middle" onclick="removing_edges_to(6)"></button> 
-<button class='button_drop' id='remove_to7' style="vertical-align:middle" onclick="removing_edges_to(7)"></button> 
-<button class='button_drop' id='remove_to8' style="vertical-align:middle" onclick="removing_edges_to(8)"></button> 
-<button class='button_drop' id='remove_to9' style="vertical-align:middle" onclick="removing_edges_to(9)"></button>
-<button class='button_drop' id='remove_to10' style="vertical-align:middle" onclick="removing_edges_to(10)"></button>
+<button class='button_drop' id='remove_to1' style  = "visibility:hidden" onclick="removing_edges_to(1)"></button> 
+<button class='button_drop' id='remove_to2' style  = "visibility:hidden" onclick="removing_edges_to(2)"></button> 
+<button class='button_drop' id='remove_to3' style  = "visibility:hidden" onclick="removing_edges_to(3)"></button> 
+<button class='button_drop' id='remove_to4' style  = "visibility:hidden" onclick="removing_edges_to(4)"></button>
+<button class='button_drop' id='remove_to5' style  = "visibility:hidden" onclick="removing_edges_to(5)"></button>
+<button class='button_drop' id='remove_to6' style  = "visibility:hidden" onclick="removing_edges_to(6)"></button> 
+<button class='button_drop' id='remove_to7' style  = "visibility:hidden" onclick="removing_edges_to(7)"></button> 
+<button class='button_drop' id='remove_to8' style  = "visibility:hidden" onclick="removing_edges_to(8)"></button> 
+<button class='button_drop' id='remove_to9' style  = "visibility:hidden" onclick="removing_edges_to(9)"></button>
+<button class='button_drop' id='remove_to10' style  = "visibility:hidden" onclick="removing_edges_to(10)"></button>
 
 </header>
 <article class="article">
