@@ -219,7 +219,7 @@ footer {background: white;color:black;}
 <button class='button_drop' onclick="window.location='mailto:Causalify@gmail.com?Subject=Suggestions for Causalify';"> Suggest ideas </button> 
 </span></font></p>
 <p align="center">
-<font size = "20" face="Helvetica"><b>Causalify 0.4a</b></font> <br>
+<font size = "20" face="Helvetica"><b>Causalify 0.4</b></font> <br>
 <font size = "4" face="Helvetica"> <i>A processing tool for researchers to assume causal structures in new research fields</i> </font>  </p>
 
 
@@ -392,14 +392,8 @@ function update(){
   var x = document.getElementById('x').value
   var y = document.getElementById('y').value
   
-if (xs.indexOf(x) == -1) {
-  window.xs.push(x);
   graph.addNodes(x);
-}
-if (ys.indexOf(y) == -1) {
-  window.ys.push(y);
   graph.addNodes(y);
-}
 graph.addEdges([x,y,{color: col,label: author}]);
 option_update();
 save();
@@ -471,7 +465,7 @@ timerfunction();
 }});
 });
 
-
+/*
 Array.prototype.remByVal = function(val) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] === val) {
@@ -481,13 +475,12 @@ Array.prototype.remByVal = function(val) {
     }
     return this;
 }
+*/
 
 function remove() {
   graph.removeNode(focus);
   document.getElementById("remove_node").style.visibility = "hidden";
   document.getElementById("remove_text").style.visibility = "hidden";
-  window.xs.remByVal(focus.id);
-  window.ys.remByVal(focus.id);
   for (var i = 1; i <= 10; i++) {
 document.getElementById("remove_from"+i).style.visibility = "hidden";
 document.getElementById("remove_to"+i).style.visibility = "hidden";
@@ -557,13 +550,11 @@ localStorage.setItem("stored_targets_undo", JSON.stringify(target_list));
 
 
 function loadlastsession() {
-window.xys = [];
 // nodes
 if (localStorage.getItem("stored_nodes") !== null) {
   var nodes_list = JSON.parse( localStorage.getItem("stored_nodes") );
 for (var i = 0; i < nodes_list.length; i++) {
 graph.addNodes(nodes_list[i]);
-window.xys.push(nodes_list[i]);
 }
 }
 // edges
