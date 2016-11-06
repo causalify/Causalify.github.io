@@ -29,6 +29,11 @@
       display: block;  /* No floating content on sides */
 }
 
+p {
+    margin: 0;
+    padding: 0;
+}
+
 header {background: white;color:black;}
 footer {background: white;color:black;}
 
@@ -115,6 +120,7 @@ footer {background: white;color:black;}
     border-radius: 4px;
     border: 1px solid #f44336;
     transition-duration: 0.4s;
+      cursor: pointer;
         padding: 4px;
 
 }
@@ -142,7 +148,7 @@ footer {background: white;color:black;}
 }
 
 .popup {
-  margin: 75px auto;
+  margin: 55px auto;
   padding: 20px;
   background: #fff;
   border-radius: 5px;
@@ -185,6 +191,7 @@ footer {background: white;color:black;}
     border-radius: 4px;
     border: 1px solid #f44336;
     transition-duration: 0.4s;
+    cursor: pointer;
     padding: 3px;
 }
 
@@ -220,7 +227,7 @@ footer {background: white;color:black;}
 </span></font></p>
 <p align="center">
 <font size = "20" face="Helvetica"><b>Causalify 0.4</b></font> <br>
-<font size = "4" face="Helvetica"> <i>A processing tool for researchers to assume causal structures in new research fields</i> </font>  </p>
+<font size = "4" face="Helvetica" color = "lightgrey"> <i>A processing tool for researchers to assume causal structures in new research fields</i> </font>  </p>
 
 
 
@@ -249,10 +256,10 @@ footer {background: white;color:black;}
 
 <div id="start" class="overlay">
   <div class="popup">
-    <font size = "20" face="Helvetica"><b>Welcome to Causalify</b></font> 
-    <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser 54+ for the optimal experience</font></div>
+    <font size = "20" face="Helvetica"><b>Welcome to Causalify</b></font> <br><br><br>
+    <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser version 54+ for the optimal experience</font> <br> <br></div>
     <div id = "intro_text" class="content"><font size = "4" face="Helvetica">
-      You now have the following options:</font> <br> <br>
+      You have the following options:</font> <br> <br>
     <button class='button_drop' onclick="closebox()" > 
     <font size = "2" face="Helvetica"> Start from scratch </font></button><br><br>
     <button class='button_drop' onclick="loadlastsession()">
@@ -342,12 +349,7 @@ function closebox(){
 <script src="springyui.js"></script>
 
 <script>
-document.getElementById("remove_node").style.visibility = "hidden";
-document.getElementById("remove_text").style.visibility = "hidden";
-for (var i = 1; i <= 10; i++) {
-document.getElementById("remove_from"+i).style.visibility = "hidden";
-document.getElementById("remove_to"+i).style.visibility = "hidden";
-}
+
 
 var graph = new Springy.Graph();
 
@@ -464,18 +466,6 @@ timerstopfunction();
 timerfunction();
 }});
 });
-
-/*
-Array.prototype.remByVal = function(val) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] === val) {
-            this.splice(i, 1);
-            i--;
-        }
-    }
-    return this;
-}
-*/
 
 function remove() {
   graph.removeNode(focus);
@@ -749,9 +739,9 @@ var dataURL = canvas.toDataURL('image/png');
 // testing browser and version
 var useragent = navigator.userAgent;
 if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(useragent.lastIndexOf('Chrome/') + 7, 2) >= 54 ){
-  document.getElementById("chrome_check").style.visibility = "hidden";
+  document.getElementById("chrome_check").style.display = "none";
 } else {
-    document.getElementById("intro_text").style.visibility = "hidden";
+    document.getElementById("intro_text").style.display = "none";
 }
 
 
@@ -801,7 +791,8 @@ if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(
       // then draws the new borders accordingly.
       function resizeCanvas() {
         htmlCanvas.width = window.innerWidth;
-        htmlCanvas.height = window.innerHeight * .6;
+        console.log(window.innerHeight);
+        htmlCanvas.height = window.innerHeight - 300;
       }
     
     })();
