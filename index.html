@@ -201,6 +201,14 @@ footer {background: white;color:black;}
     color: white;
 }
 
+input[type=text] {
+    border: none;
+    border-bottom: 2px solid red;
+   font-size: 2;
+  font-family:Helvetica;
+  text-align: center;
+}
+
 @media all and (min-width: 768px) {
     .nav {text-align:left;-webkit-flex: 1 auto;flex:.2 auto;-webkit-order:1;order:1;}
     .article {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
@@ -305,11 +313,11 @@ function closebox(){
 <datalist id="xs_list">    </datalist>
 <datalist id="ys_list">    </datalist>
 
-<input type='text' id='author' size = 16 placeholder="Author et al. (year)"> 
+<input type='text' id='author' size = 25 size = "2" face="Helvetica" placeholder="Author et al. (year)"> 
 <font size = "2" face="Helvetica"> suggest that increased </font> 
-<input type='text' id='x' size = 10 list=xs_list placeholder="exposure">  
+<input type='text' id='x' size = 20 list=xs_list placeholder="exposure">  
 <font size = "2" face="Helvetica"> cause the level of </font>
-<input type='text' id='y' size = 10 list=ys_list placeholder="outcome">
+<input type='text' id='y' size = 20 list=ys_list placeholder="outcome">
 <font size = "2" face="Helvetica"> to go </font>
 <button class="button" style="vertical-align:middle" onclick="incr()"><span>up</span></button>
 <font size = "2" face="Helvetica">or</font>
