@@ -34,7 +34,10 @@ p {
     padding: 0;
 }
 
-header {background: white;color:black;}
+header {background: white;color:black;
+scrollbar-base-color: orange;
+scrollbar-arrow-color: green;
+scrollbar-DarkShadow-Color: blue;}
 footer {background: white;color:black;}
 
 
@@ -233,7 +236,7 @@ input[type=text] {
 <button class='button_drop' onclick="window.location='mailto:Causalify@gmail.com?Subject=Suggestions for Causalify';"> Suggest ideas </button> 
 </font></p><br>
 <p align="center">
-<font size = "20" face="Helvetica"><b>Causalify 0.4</b></font> <br>
+<font size = "20" face="Helvetica"><b>Causalify 0.5</b></font> <br>
 <font size = "4" face="Helvetica" color = "lightgrey"> <i>A processing tool for researchers to assume causal structures in new research fields</i> </font>  </p>
 
 
@@ -312,41 +315,45 @@ function closebox(){
 
 <datalist id="xs_list">    </datalist>
 <datalist id="ys_list">    </datalist>
-
+<font size = "2" face="Helvetica"> 
 <input type='text' id='author' size = 25 size = "2" face="Helvetica" placeholder="Author et al. (year)"> 
-<font size = "2" face="Helvetica"> suggest that increased </font> 
+suggest that increased 
 <input type='text' id='x' size = 20 list=xs_list placeholder="exposure">  
-<font size = "2" face="Helvetica"> cause the level of </font>
+cause the level of
 <input type='text' id='y' size = 20 list=ys_list placeholder="outcome">
-<font size = "2" face="Helvetica"> to go </font>
+to go
 <button class="button" style="vertical-align:middle" onclick="incr()"><span>up</span></button>
-<font size = "2" face="Helvetica">or</font>
+or
 <button class="button_d" style="vertical-align:middle" onclick="decr()"><span>down</span></button>
+with strength of [low]
+<input type="range" min="10" max="90" value="50" step="1" onchange="showValue(this.value)" />
+[high]
+</font>
 <br>
 <font id='remove_text' onclick="removing_text" style  = "visibility:hidden"  size = "2" face="Helvetica" color = "grey">Remove <font size = "3"> <b>node</b> </font> or →path→</font> 
-<button class='button_drop' id='remove_from10' style  = "visibility:hidden"  onclick="removing_edges_from(5)"></button> 
-<button class='button_drop' id='remove_from9' style  = "visibility:hidden" onclick="removing_edges_from(4)"></button> 
-<button class='button_drop' id='remove_from8' style  = "visibility:hidden" onclick="removing_edges_from(3)"></button> 
-<button class='button_drop' id='remove_from7' style  = "visibility:hidden" onclick="removing_edges_from(2)"></button>
-<button class='button_drop' id='remove_from6' style  = "visibility:hidden" onclick="removing_edges_from(1)"></button>
-<button class='button_drop' id='remove_from5' style  = "visibility:hidden" onclick="removing_edges_from(5)"></button> 
-<button class='button_drop' id='remove_from4' style  = "visibility:hidden" onclick="removing_edges_from(4)"></button> 
-<button class='button_drop' id='remove_from3' style  = "visibility:hidden" onclick="removing_edges_from(3)"></button> 
-<button class='button_drop' id='remove_from2' style  = "visibility:hidden" onclick="removing_edges_from(2)"></button>
-<button class='button_drop' id='remove_from1' style  = "visibility:hidden" onclick="removing_edges_from(1)"></button>
+<button class='button_drop' id='remove_from10' style  = "display:none"  onclick="removing_edges_from(5)"></button> 
+<button class='button_drop' id='remove_from9' style  = "display:none" onclick="removing_edges_from(4)"></button> 
+<button class='button_drop' id='remove_from8' style  = "display:none" onclick="removing_edges_from(3)"></button> 
+<button class='button_drop' id='remove_from7' style  = "display:none" onclick="removing_edges_from(2)"></button>
+<button class='button_drop' id='remove_from6' style  = "display:none" onclick="removing_edges_from(1)"></button>
+<button class='button_drop' id='remove_from5' style  = "display:none" onclick="removing_edges_from(5)"></button> 
+<button class='button_drop' id='remove_from4' style  = "display:none" onclick="removing_edges_from(4)"></button> 
+<button class='button_drop' id='remove_from3' style  = "display:none" onclick="removing_edges_from(3)"></button> 
+<button class='button_drop' id='remove_from2' style  = "display:none" onclick="removing_edges_from(2)"></button>
+<button class='button_drop' id='remove_from1' style  = "display:none" onclick="removing_edges_from(1)"></button>
 
 <button class='button_drop' id='remove_node' style  = "visibility:hidden" onclick="remove()" syle="font: bold 14px"><b><font id = 'remove_node_text' size = 3 > </font></b></button> 
 
-<button class='button_drop' id='remove_to1' style  = "visibility:hidden" onclick="removing_edges_to(1)"></button> 
-<button class='button_drop' id='remove_to2' style  = "visibility:hidden" onclick="removing_edges_to(2)"></button> 
-<button class='button_drop' id='remove_to3' style  = "visibility:hidden" onclick="removing_edges_to(3)"></button> 
-<button class='button_drop' id='remove_to4' style  = "visibility:hidden" onclick="removing_edges_to(4)"></button>
-<button class='button_drop' id='remove_to5' style  = "visibility:hidden" onclick="removing_edges_to(5)"></button>
-<button class='button_drop' id='remove_to6' style  = "visibility:hidden" onclick="removing_edges_to(6)"></button> 
-<button class='button_drop' id='remove_to7' style  = "visibility:hidden" onclick="removing_edges_to(7)"></button> 
-<button class='button_drop' id='remove_to8' style  = "visibility:hidden" onclick="removing_edges_to(8)"></button> 
-<button class='button_drop' id='remove_to9' style  = "visibility:hidden" onclick="removing_edges_to(9)"></button>
-<button class='button_drop' id='remove_to10' style  = "visibility:hidden" onclick="removing_edges_to(10)"></button>
+<button class='button_drop' id='remove_to1' style  = "display:none" onclick="removing_edges_to(1)"></button> 
+<button class='button_drop' id='remove_to2' style  = "display:none" onclick="removing_edges_to(2)"></button> 
+<button class='button_drop' id='remove_to3' style  = "display:none" onclick="removing_edges_to(3)"></button> 
+<button class='button_drop' id='remove_to4' style  = "display:none" onclick="removing_edges_to(4)"></button>
+<button class='button_drop' id='remove_to5' style  = "display:none" onclick="removing_edges_to(5)"></button>
+<button class='button_drop' id='remove_to6' style  = "display:none" onclick="removing_edges_to(6)"></button> 
+<button class='button_drop' id='remove_to7' style  = "display:none" onclick="removing_edges_to(7)"></button> 
+<button class='button_drop' id='remove_to8' style  = "display:none" onclick="removing_edges_to(8)"></button> 
+<button class='button_drop' id='remove_to9' style  = "display:none" onclick="removing_edges_to(9)"></button>
+<button class='button_drop' id='remove_to10' style  = "display:none" onclick="removing_edges_to(10)"></button>
 
 </header>
 <article class="article">
@@ -359,8 +366,14 @@ function closebox(){
 
 
 var graph = new Springy.Graph();
+window.strength_global = 9 - Math.sqrt(90-50);
+// window.note = "";
 
-window.note = "";
+
+function showValue(newValue)
+{
+  window.strength_global = 10 - Math.sqrt(100-newValue);;
+}
 
 function remove_duplicates_safe(arr) {
     var seen = {};
@@ -396,25 +409,27 @@ document.getElementById('ys_list').innerHTML = options;
 }
 
 function update(){
-  save_undo();
+//  save_undo();
   var author = document.getElementById('author').value
   var x = document.getElementById('x').value
   var y = document.getElementById('y').value
+  var strength_local = window.strength_global;
   
   graph.addNodes(x);
   graph.addNodes(y);
-graph.addEdges([x,y,{color: col,label: author}]);
+graph.addEdges([x,y,{color: col,label: author, strength: strength_local}]);
 option_update();
 save();
 //document.getElementById('undo_button').style.visibility = "visible";
 }
 
+/*
 function undo(){
 load_undo();
 option_update();
 document.getElementById('undo_button').style.visibility = "hidden";
 }
-
+*/
 
 var timer;
 
@@ -423,8 +438,8 @@ function timerfunction() {
   document.getElementById('remove_node').style.visibility = "hidden";
   document.getElementById('remove_text').style.visibility = "hidden";
   for (var i = 1; i <= 10; i++) {
-  document.getElementById('remove_to'+i).style.visibility = "hidden";
-  document.getElementById('remove_from'+i).style.visibility = "hidden";
+  document.getElementById('remove_to'+i).style.display = "none";
+  document.getElementById('remove_from'+i).style.display = "none";
 }}, 7000);
 }
 
@@ -443,7 +458,7 @@ jQuery(function(){
      document.getElementById("remove_text").style.visibility = "visible";
 
    for (var i = 1; i <= 10; i++) {
-       document.getElementById('remove_from'+i).style.visibility = "hidden";
+       document.getElementById('remove_from'+i).style.display = "none";
 }
 
      var count = 0; 
@@ -453,19 +468,19 @@ jQuery(function(){
           if (graph.edges[i].source.id === node.id) {
             var count = count + 1;
        document.getElementById('remove_to'+count).innerHTML = "→ " + graph.edges[i].target.id;
-       document.getElementById('remove_to'+count).style.visibility = "visible";
+       document.getElementById('remove_to'+count).style.display = "inline";
        to.push(graph.edges[i].target.id)
         }
       }
-   for (var i = count+1; i <= 5; i++) {
-       document.getElementById('remove_to'+i).style.visibility = "hidden";
+   for (var i = count+1; i <= 10; i++) {
+       document.getElementById('remove_to'+i).style.display = "none";
 }
     var count = 0; 
    for (var i = 0; i < graph.edges.length; i++) {
           if (graph.edges[i].target.id === node.id) {
             var count = count + 1;
        document.getElementById('remove_from'+count).innerHTML = graph.edges[i].source.id + " →";
-       document.getElementById('remove_from'+count).style.visibility = "visible";
+       document.getElementById('remove_from'+count).style.display = "inline";
        from.push(graph.edges[i].source.id)
         }
       }
@@ -479,8 +494,8 @@ function remove() {
   document.getElementById("remove_node").style.visibility = "hidden";
   document.getElementById("remove_text").style.visibility = "hidden";
   for (var i = 1; i <= 10; i++) {
-document.getElementById("remove_from"+i).style.visibility = "hidden";
-document.getElementById("remove_to"+i).style.visibility = "hidden";
+document.getElementById("remove_from"+i).style.display = "none";
+document.getElementById("remove_to"+i).style.display = "none";
 }
 save();
 }
@@ -516,18 +531,22 @@ var source_list = [];
 var target_list = [];
 var color_list  = [];
 var author_list = [];
+var strength_list = [];
 for (var i = 0; i < graph.edges.length; i++) {
 source_list.push(graph.edges[i].source.id);
 target_list.push(graph.edges[i].target.id);
 color_list.push(graph.edges[i].data.color);
 author_list.push(graph.edges[i].data.label);
+strength_list.push(graph.edges[i].data.strength);
 }
 localStorage.setItem("stored_sources", JSON.stringify(source_list));
 localStorage.setItem("stored_targets", JSON.stringify(target_list));
 localStorage.setItem("stored_colors", JSON.stringify(color_list));
 localStorage.setItem("stored_authors", JSON.stringify(author_list));
+localStorage.setItem("stored_strength", JSON.stringify(strength_list));
 }
 
+/*
 function save_undo() {
 var nodes_list = [];
 for (var i = 0; i < graph.nodes.length; i++) {
@@ -544,7 +563,7 @@ target_list.push(graph.edges[i].target.id);
 localStorage.setItem("stored_sources_undo", JSON.stringify(source_list));
 localStorage.setItem("stored_targets_undo", JSON.stringify(target_list));
 }
-
+*/
 
 function loadlastsession() {
 // nodes
@@ -560,8 +579,9 @@ var source_list = JSON.parse( localStorage.getItem("stored_sources") );
 var target_list = JSON.parse( localStorage.getItem("stored_targets") );
 var color_list = JSON.parse( localStorage.getItem("stored_colors") );
 var author_list = JSON.parse( localStorage.getItem("stored_authors") );
+var strength_list = JSON.parse( localStorage.getItem("stored_strength") );
 for (var i = 0; i < source_list.length; i++) {
-graph.addEdges([source_list[i],target_list[i],{color: color_list[i],label: author_list[i]}]);
+graph.addEdges([source_list[i],target_list[i],{color: color_list[i],label: author_list[i], strength: strength_list[i]}]); 
 }
 }
 // update options
@@ -570,6 +590,7 @@ option_update();
 closebox();
 }
 
+/*
 function load_undo() {
 var nodes_list = JSON.parse( localStorage.getItem("stored_nodes_undo") );
 console.log(nodes_list);
@@ -584,7 +605,7 @@ if (x === 0){
   graph.removeNode(graph.nodes[i]);
 } 
 }
-/*
+
 var source_list = JSON.parse( localStorage.getItem("stored_sources_undo") );
 var target_list = JSON.parse( localStorage.getItem("stored_targets_undo") );
 for (var i = 0; i < nodes_list; i++) {
@@ -595,9 +616,9 @@ for (var i = 0; i < nodes_list; i++) {
   console.log(grap.nodes[g].id);
 }
 }
-*/
-}
 
+}
+*/
 
 function export_data(){
 console.log(graph);
@@ -613,13 +634,15 @@ var source_list = [];
 var target_list = [];
 var color_list  = [];
 var author_list = [];
+var strength_list = [];
 for (var i = 0; i < graph.edges.length; i++) {
 source_list.push(graph.edges[i].source.id);
 target_list.push(graph.edges[i].target.id);
 color_list.push(graph.edges[i].data.color);
 author_list.push(graph.edges[i].data.label);
+strength_list.push(graph.edges[i].data.strength);
 }
-var data = [nodes_list,source_list,target_list,color_list,author_list];
+var data = [nodes_list,source_list,target_list,color_list,author_list,strength_list];
 console.log(data);
 
 function downloadFile(data, fileName) {
@@ -710,12 +733,14 @@ var source_list = getCol(data,1);
 var target_list = getCol(data,2);
 var color_list =  getCol(data,3);
 var author_list = getCol(data,4);
+var strength_list = getCol(data,5);
 console.log(source_list);
 console.log(target_list);
 console.log(color_list);
 console.log(author_list);
+console.log(strength_list);
 for (var i = 0; i < source_list.length; i++) {
-graph.addEdges([source_list[i],target_list[i],{color: color_list[i],label: author_list[i]}]);
+graph.addEdges([source_list[i],target_list[i],{color: color_list[i],label: author_list[i], strength: strength_list[i]}]);
 }
 // update options
 option_update();
