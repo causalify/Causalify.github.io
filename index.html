@@ -268,7 +268,8 @@ input[type=text] {
   <div class="popup">
     <font size = "20" face="Helvetica"><b>Welcome to Causalify</b></font> <br><br><br>
     <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser version 54+ for the optimal experience</font> <br> <br></div>
-    <div id = "intro_text" class="content"><font size = "4" face="Helvetica">
+    <div id = "intro_text" class="content"><font size = "2" face="Helvetica" color = "red">
+      This is a beta with regular updates. This optimisation proces may affect the potential to load old saved structures - Sorry! </font><br><font size = "4" face="Helvetica">
       You have the following options:</font> <br> <br>
     <button class='button_drop' onclick="closebox()" > 
     <font size = "2" face="Helvetica"> Start from scratch </font></button><br><br>
@@ -795,32 +796,13 @@ if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(
   <script>
     (function() {
       var 
-        // Obtain a reference to the canvas element
-        // using its id.
         htmlCanvas = document.getElementById('springydemo'),
-      
-          // Obtain a graphics context on the
-          // canvas element for drawing.
           context = htmlCanvas.getContext('2d');
- 
-      // Start listening to resize events and
-      // draw canvas.
       initialize();
- 
       function initialize() {
-        // Register an event listener to
-        // call the resizeCanvas() function each time 
-        // the window is resized.
         window.addEventListener('resize', resizeCanvas, false);
-        
-        // Draw canvas border for the first time.
         resizeCanvas();
       }
-        
-    
-      // Runs each time the DOM window resize event fires.
-      // Resets the canvas dimensions to match window,
-      // then draws the new borders accordingly.
       function resizeCanvas() {
         htmlCanvas.width = window.innerWidth;
         console.log(window.innerHeight);
