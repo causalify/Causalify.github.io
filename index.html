@@ -326,9 +326,9 @@ to go
 <button class="button" style="vertical-align:middle" onclick="incr()"><span>up</span></button>
 or
 <button class="button_d" style="vertical-align:middle" onclick="decr()"><span>down</span></button>
-with strength of [low]
-<input type="range" min="10" max="90" value="50" step="1" onchange="showValue(this.value)" />
-[high]
+with [low]
+<input type="range" min="10" max="90" value="50" step="1" style="width:50px;" onchange="showValue(this.value)" />
+[high] strength
 </font>
 <br>
 <font id='remove_text' onclick="removing_text" style  = "visibility:hidden"  size = "2" face="Helvetica" color = "grey">Remove <font size = "3"> <b>node</b> </font> or →path→</font> 
@@ -759,6 +759,7 @@ function errorHandler(evt) {
 function download_image(){
   var canvas = document.getElementById('springydemo'),
     ctx = canvas.getContext('2d');
+
 var dataURL = canvas.toDataURL('image/png');
             var link = document.createElement("a");
             link.href = dataURL;
@@ -795,8 +796,7 @@ if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(
 
   <script>
     (function() {
-      var 
-        htmlCanvas = document.getElementById('springydemo'),
+      var htmlCanvas = document.getElementById('springydemo'),
           context = htmlCanvas.getContext('2d');
       initialize();
       function initialize() {
