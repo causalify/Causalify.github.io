@@ -34,12 +34,31 @@ p {
     padding: 0;
 }
 
-header {background: white;color:black;
-scrollbar-base-color: orange;
-scrollbar-arrow-color: green;
-scrollbar-DarkShadow-Color: blue;}
+header {background: white;color:black;}
 footer {background: white;color:black;}
 
+.slide_class{
+    -webkit-appearance: none;
+}
+
+.slide_class::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    margin-top: -4px;
+}
+
+.slide_class::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 3px;
+    border-left: 3px solid #ccc;
+    border-right: 3px solid #ccc;
+    background: #ddd;
+    border-radius: 3px;
+    margin-top: -10px;
+}
 
 .button {
   display: inline-block;
@@ -268,8 +287,8 @@ input[type=text] {
   <div class="popup">
     <font size = "20" face="Helvetica"><b>Welcome to Causalify</b></font> <br><br><br>
     <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser version 54+ for the optimal experience</font> <br> <br></div>
-    <div id = "intro_text" class="content"><font size = "2" face="Helvetica" color = "red">
-      This is a beta with regular updates. This optimisation proces may cause issues with loading old saved structures. </font><br><br><font size = "4" face="Helvetica">
+    <div id = "intro_text" class="content"><font size = "2" face="Helvetica" color = "DodgerBlue">
+      This is a beta with regular updates, which may cause issues when loading structures from older versions. </font><br><br><font size = "4" face="Helvetica">
       You have the following options:</font> <br> <br>
     <button class='button_drop' onclick="closebox()" > 
     <font size = "2" face="Helvetica"> Start from scratch </font></button><br><br>
@@ -322,13 +341,12 @@ suggest that increased
 <input type='text' id='x' size = 20 list=xs_list placeholder="exposure">  
 cause the level of
 <input type='text' id='y' size = 20 list=ys_list placeholder="outcome">
-to go
+to go with [low]
+<input id='slider' class='slide_class' type="range" min="10" max="90" value="50" step="1" style="width:50px;" onchange="showValue(this.value)" />
+[high] strength
 <button class="button" style="vertical-align:middle" onclick="incr()"><span>up</span></button>
 or
 <button class="button_d" style="vertical-align:middle" onclick="decr()"><span>down</span></button>
-with [low]
-<input type="range" min="10" max="90" value="50" step="1" style="width:50px;" onchange="showValue(this.value)" />
-[high] strength
 </font>
 <br>
 <font id='remove_text' onclick="removing_text" style  = "visibility:hidden"  size = "2" face="Helvetica" color = "grey">Remove <font size = "3"> <b>node</b> </font> or →path→</font> 
@@ -373,7 +391,8 @@ window.strength_global = 9 - Math.sqrt(90-50);
 
 function showValue(newValue)
 {
-  window.strength_global = 10 - Math.sqrt(100-newValue);;
+  window.strength_global = 10 - Math.sqrt(100-newValue);
+ // document.getElementById('slider').style.height = 20 + "px";
 }
 
 function remove_duplicates_safe(arr) {
