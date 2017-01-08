@@ -786,6 +786,10 @@ function errorHandler(evt) {
 function download_image(){
   var canvas = document.getElementById('springydemo'),
     ctx = canvas.getContext('2d');
+    ctx.textBaseline = "top";                // start with drawing text from top
+    ctx.textAlign = "center"; 
+    ctx.fillStyle = "black";                   // set a color for the text
+    ctx.fillText("Causalify.github.io", canvas.width / 2, canvas.height * .95);       // draw the text at some position (x, y)
 
 var dataURL = canvas.toDataURL('image/png');
             var link = document.createElement("a");
