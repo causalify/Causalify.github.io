@@ -296,17 +296,17 @@ input[type=text] {
    <img src="causalify_logo.png">
     <br>
     <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser version 54+ for the optimal experience</font> <br> <br></div>
-    <div id = "intro_text" class="content"><br><font size = "4" face="Helvetica">
-      Welcome! You have the following options:</font> <br> <br> <br>
+    <div id = "intro_text" class="content"><br> <br> 
     <button class='button_drop' onclick="closebox()" > 
     <font size = "2" face="Helvetica"> Start from scratch </font></button><br><br>
     <button class='button_drop' onclick="loadlastsession()">
     <font size = "2" face="Helvetica"> Last causal structure</font></button><br><br>
     <input class='inputfile' type="file" id="csvFileInput" onchange="handleFiles(this.files)"accept=".csv"> </input>   <label for="csvFileInput">  <font size = "2" face="Helvetica"> Load causal structure ⇧</font></label>
-
-<br>
+    <br><br>
+    <button class='button_drop' onclick="example()" > 
+    <font size = "1.8" face="Helvetica"> Example from Hernán et al. (2002) <i>Causal Knowledge as a Prerequisite for Confounding Evaluation</i> </font></button>
      <br></div>
-
+<br>
 
      <br>  _____________________________  <br> <br>  
     <div class="content">
@@ -618,6 +618,27 @@ option_update();
 closebox();
 }
 
+function example() {
+// nodes
+graph.addNodes("Antiepileptic drugs");
+graph.addNodes("Plasma folate levels");
+graph.addNodes("Birth defects");
+graph.addNodes("Alcohol intake");
+
+// edges
+ graph.addEdges(["Antiepileptic drugs","Plasma folate levels",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); 
+ graph.addEdges(["Antiepileptic drugs","Birth defects",{color: '#7DBE3C',label: 'Hernán et al. 2002', strength: 2}]); 
+ graph.addEdges(["Plasma folate levels","Birth defects",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); 
+ graph.addEdges(["Alcohol intake","Plasma folate levels",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); 
+ graph.addEdges(["Alcohol intake","Birth defects",{color: '#7DBE3C',label: 'Hernán et al. 2002', strength: 2}]); 
+
+// update options
+option_update();
+//#### after loading
+closebox();
+}
+
+
 /*
 function load_undo() {
 var nodes_list = JSON.parse( localStorage.getItem("stored_nodes_undo") );
@@ -836,7 +857,7 @@ if( navigator.userAgent.toLowerCase().indexOf('chrome') > -1 & useragent.substr(
       }
       function resizeCanvas() {
         htmlCanvas.width = window.innerWidth;
-        console.log(window.innerHeight);
+        //console.log(window.innerHeight);
         htmlCanvas.height = window.innerHeight - 320;
       }
     
