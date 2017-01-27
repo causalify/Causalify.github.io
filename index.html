@@ -233,6 +233,10 @@ input[type=text] {
   text-align: center;
 }
 
+input:focus {
+  transition: ease-in-out,  outline, .1s ease-in-out;
+}
+
 @media all and (min-width: 768px) {
     .nav {text-align:left;-webkit-flex: 1 auto;flex:.2 auto;-webkit-order:1;order:1;}
     .article {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
@@ -618,24 +622,27 @@ option_update();
 closebox();
 }
 
-function example() {
-// nodes
-graph.addNodes("Antiepileptic drugs");
-graph.addNodes("Plasma folate levels");
-graph.addNodes("Birth defects");
-graph.addNodes("Alcohol intake");
+  function sleep(delay) {
+    var start = new Date().getTime();
+    while (new Date().getTime() < start + delay);
+  }
 
-// edges
- graph.addEdges(["Antiepileptic drugs","Plasma folate levels",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); 
- graph.addEdges(["Antiepileptic drugs","Birth defects",{color: '#7DBE3C',label: 'Hernán et al. 2002', strength: 2}]); 
- graph.addEdges(["Plasma folate levels","Birth defects",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); 
- graph.addEdges(["Alcohol intake","Plasma folate levels",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); 
- graph.addEdges(["Alcohol intake","Birth defects",{color: '#7DBE3C',label: 'Hernán et al. 2002', strength: 2}]); 
+function example() {
+closebox()
+// nodes
+setTimeout(function() {graph.addNodes("Antiepileptic drugs");}, 100);
+setTimeout(function() {graph.addNodes("Plasma folate levels");},500);
+setTimeout(function() {graph.addEdges(["Antiepileptic drugs","Plasma folate levels",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); },1300);
+setTimeout(function() {graph.addNodes("Birth defects");},3500);
+setTimeout(function() {graph.addNodes("Alcohol intake");},3800);
+setTimeout(function() {graph.addEdges(["Antiepileptic drugs","Birth defects",{color: '#7DBE3C',label: 'Hernán et al. 2002', strength: 2}]); },4500);
+setTimeout(function() {graph.addEdges(["Plasma folate levels","Birth defects",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); },4700);
+setTimeout(function() {graph.addEdges(["Alcohol intake","Plasma folate levels",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); },4900);
+setTimeout(function() {graph.addEdges(["Alcohol intake","Birth defects",{color: '#7DBE3C',label: 'Hernán et al. 2002', strength: 2}]); },5000);
 
 // update options
 option_update();
 //#### after loading
-closebox();
 }
 
 
