@@ -500,7 +500,7 @@
 		if (onRenderStart !== undefined) { onRenderStart(); }
 
 		Springy.requestAnimationFrame(function step() {
-			t.tick(0.03);
+			t.tick(.005);
 
 			if (render !== undefined) {
 				render();

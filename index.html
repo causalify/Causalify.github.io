@@ -154,6 +154,22 @@ footer {background: white;color:black;}
     color: white;
 }
 
+.button_drop_red {
+    background-color: #CC333F;
+    color: black;
+    border-radius: 4px;
+    border: 1px solid #CC333F;
+    transition-duration: 0.4s;
+      cursor: pointer;
+        padding: 4px;
+
+}
+
+.button_drop_red:hover {
+    color: white;
+}
+
+
 
 .overlay {
   position: fixed;
@@ -278,11 +294,11 @@ input:focus {
     <h2>Ever needed a processing tool for visualising causal assumptions</h2>
     <a class="close" href="#">&times;</a>
     <div class="content"><font size = "4" face="Helvetica">
-      You, as a researcher, know your research field. However, occasionally you need to understand entirely new fields with its own literature of assumed causal relations. <br><br>
+      You, as a researcher, know your research field. However, occasionally you need to become familiar with an entirely new field with its own literature of assumed causal relations. <br><br>
 
       Tools such as a pen and paper, tables, and DAGitty are extremely useful. Unfortunately static drawings needs constant rearrangements, matrixes are not easily communicated, and though DAGitty is an outstanding tool to test dependencies in DAGs it needs to be rearranged just as paper drawings do. <br><br>
 
-      The process of reading and conceptualising new causal structures needs something more dynamic! Our tool, Causalify, is a processing tool, assisting you when you are starting to become familiar with the causal assumptions in the literature for research fields yet unfamiliar to you.<br><br>
+      The process of reading and conceptualising new causal structures needs something more dynamic! Our tool, Causalify, is a processing tool assisting you as you are becoming familiar with the causal assumptions in a new research field.<br><br>
 
       Happy research!
     <br><br>
@@ -300,28 +316,27 @@ input:focus {
    <img src="causalify_logo.png">
     <br>
     <div id="chrome_check"><img src="chrome.ico" height="42" width="42" > <br><br><font size = "2" face="Helvetica" color = "red"> Please use a Chrome browser version 54+ for the optimal experience</font> <br> <br></div>
-    <div id = "intro_text" class="content"><br> <br> 
+    <div id = "intro_text" class="content"><br> <br>
+    <button class='button_drop_red' onclick="example()" > 
+    <font size = "2" face="Helvetica">See Causalify in action</font></button> <br> <br> 
     <button class='button_drop' onclick="closebox()" > 
     <font size = "2" face="Helvetica"> Start from scratch </font></button><br><br>
     <button class='button_drop' onclick="loadlastsession()">
     <font size = "2" face="Helvetica"> Last causal structure</font></button><br><br>
     <input class='inputfile' type="file" id="csvFileInput" onchange="handleFiles(this.files)"accept=".csv"> </input>   <label for="csvFileInput">  <font size = "2" face="Helvetica"> Load causal structure ⇧</font></label>
-    <br><br>
-    <button class='button_drop' onclick="example()" > 
-    <font size = "1.8" face="Helvetica"> Example from Hernán et al. (2002) <i>Causal Knowledge as a Prerequisite for Confounding Evaluation</i> </font></button>
-     <br></div>
-<br>
+    <br><br></div>
+
 
      <br>  _____________________________  <br> <br>  
     <div class="content">
      <i>
       <font size = "2" face="Helvetica">
   <b>   Ever needed a processing tool for visualising causal assumptions </b> <br><br>
-      You, as a researcher, know your research field. However, occasionally you need to understand entirely new fields with its own literature of assumed causal relations. <br><br>
+      You, as a researcher, know your research field. However, occasionally you need to become familiar with an entirely new field with its own literature of assumed causal relations. <br><br>
 
       Tools such as a pen and paper, tables, and DAGitty are extremely useful. Unfortunately static drawings needs constant rearrangements, matrixes are not easily communicated, and though DAGitty is an outstanding tool to test dependencies in DAGs it needs to be rearranged just as paper drawings do. <br><br>
 
-      The process of reading and conceptualising new causal structures needs something more dynamic! Our tool, Causalify, is a processing tool, assisting you when you are starting to become familiar with the causal assumptions in the literature for research fields yet unfamiliar to you.<br><br>
+      The process of reading and conceptualising new causal structures needs something more dynamic! Our tool, Causalify, is a processing tool assisting you as you are becoming familiar with the causal assumptions in a new research field.<br><br>
 
 
       Happy research!<br>
