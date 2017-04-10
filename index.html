@@ -70,8 +70,8 @@ footer {background: white;color:black;}
   color: white;
   text-align: center;
   font-size: 12px;
-  padding: 10px;
-  width: 40px;
+  padding: 5px;
+  width: 70px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -108,8 +108,8 @@ footer {background: white;color:black;}
   color: white;
   text-align: center;
   font-size: 12px;
-  padding: 10px;
-  width: 55px;
+  padding: 5px;
+  width: 70px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -134,6 +134,45 @@ footer {background: white;color:black;}
 }
 
 .button_d:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.button_none {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #808080;
+  border: none;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px;
+  width: 70px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button_none span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button_none span:after {
+  position: relative;
+  opacity: 0;
+  top: 0;
+  transition: 0.5s;
+}
+
+.button_none:hover span {
+  font-weight: bold;
+}
+
+.button_none:hover span:after {
   opacity: 1;
   right: 0;
 }
@@ -366,14 +405,17 @@ function closebox(){
 <input type='text' id='author' size = 25 size = "2" face="Helvetica" placeholder="Author et al. (year)"> 
 suggest that increased 
 <input type='text' id='x' size = 20 list=xs_list placeholder="exposure">  
-cause the level of
+cause
 <input type='text' id='y' size = 20 list=ys_list placeholder="outcome">
-to go with [low]
+to
+<button class="button" style="vertical-align:middle" onclick="incr()"><span>increase</span></button>
+,
+<button class="button_d" style="vertical-align:middle" onclick="decr()"><span>decrease</span></button>
+or
+<button class="button_none" style="vertical-align:middle" onclick="no_effect()"><span>no effect</span></button>
+with [low]
 <input id='slider' class='slide_class' type="range" min="10" max="90" value="50" step="1" style="width:50px;" onchange="showValue(this.value)" />
 [high] strength
-<button class="button" style="vertical-align:middle" onclick="incr()"><span>up</span></button>
-or
-<button class="button_d" style="vertical-align:middle" onclick="decr()"><span>down</span></button>
 </font>
 <br>
 <font id='remove_text' onclick="removing_text" style  = "visibility:hidden"  size = "2" face="Helvetica" color = "grey">Remove <font size = "2"> <b>node</b> </font> or →path→</font> 
@@ -443,6 +485,12 @@ function incr(){
 function decr(){
   window.col = '#CC333F';
   window.affect = " decreases "
+  update();
+}
+
+function no_effect(){
+  window.col = '#808080';
+  window.affect = " no effect "
   update();
 }
 
