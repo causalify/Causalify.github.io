@@ -409,12 +409,42 @@
 
 
 	// Physics stuff
+
+	Layout.ForceDirected.prototype.applyTemporality = function() {
+		this.eachNode(function(n1, point1) {
+	 		this.eachNode(function(n2, point2) {
+			var temporal_cause = 0;
+			for (var i = 0; i < graph.edges.length; i++) {
+			 if (n1.id == graph.edges[i].target.id) {
+			 	var temporal_cause = temporal_cause + 1;
+			 }
+			}
+			//if (n1.id == "Birth defects") {
+			// 	if (temporal_cause == 1) {
+					console.log(n1.id);
+					var d = point1.p.subtract(point2.p);
+					//console.log(d.x);
+					var distance = d.magnitude() + 0.1; // avoid massive forces at small distances (and divide by zero)
+					var direction = d.normalise();
+					direction.x = (direction.x - 1 + temporal_cause)*2;
+					//console.log(direction);
+					// apply force to each end point
+					point1.applyForce(direction.multiply(this.repulsion).divide(distance * distance * 0.5));
+					point2.applyForce(direction.multiply(this.repulsion).divide(distance * distance * -0.5));
+			//};
+
+		});
+		});
+	};
+
 	Layout.ForceDirected.prototype.applyCoulombsLaw = function() {
 		this.eachNode(function(n1, point1) {
 			this.eachNode(function(n2, point2) {
 				if (point1 !== point2)
 				{
+					//console.log(n1);
 					var d = point1.p.subtract(point2.p);
+					//console.log(d.x);
 					var distance = d.magnitude() + 0.1; // avoid massive forces at small distances (and divide by zero)
 					var direction = d.normalise();
 
@@ -440,7 +470,7 @@
 
 	Layout.ForceDirected.prototype.attractToCentre = function() {
 		this.eachNode(function(node, point) {
-			var direction = point.p.multiply(-1.0);
+			var direction = point.p.multiply(-3.0);
 			point.applyForce(direction.multiply(this.repulsion / 50.0));
 		});
 	};
@@ -521,6 +551,7 @@
 	}
 
 	Layout.ForceDirected.prototype.tick = function(timestep) {
+		this.applyTemporality();
 		this.applyCoulombsLaw();
 		this.applyHookesLaw();
 		this.attractToCentre();
