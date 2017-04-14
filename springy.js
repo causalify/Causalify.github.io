@@ -485,7 +485,7 @@ window.ranking_of_temp = [];
 
 setInterval(function() {
 update_temporality();
-},2000);
+},5000);
 
 
 	Layout.ForceDirected.prototype.applyTemporality = function() {
