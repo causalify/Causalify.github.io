@@ -700,7 +700,7 @@ closebox();
 function example() {
 closebox()
 // nodes
-graph.update_temporality();
+update_temporality();
 setTimeout(function() {graph.addNodes("Antiepileptic drugs");}, 100);
 setTimeout(function() {graph.addNodes("Plasma folate levels");},500);
 setTimeout(function() {graph.addEdges(["Antiepileptic drugs","Plasma folate levels",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); },1300);
@@ -714,7 +714,7 @@ setTimeout(function() {graph.addEdges(["Alcohol intake","Birth defects",{color: 
 // update options
 setTimeout(function() {option_update();},5050);
 //#### after loading
-setTimeout(function() {graph.update_temporality();},5100);
+setTimeout(function() {update_temporality();},5100);
 }
 
 

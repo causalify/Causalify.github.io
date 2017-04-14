@@ -409,7 +409,7 @@
 
 
 	// Physics stuff
-Graph.prototype.update_temporality = function() {
+window.update_temporality = function() {
 
 var temp_nodes = [];
 for(var i = 0; i < graph.nodes.length; i++) {
