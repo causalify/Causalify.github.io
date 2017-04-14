@@ -411,7 +411,7 @@
 	// Physics stuff
 	// Update temporality
 setInterval(function() {
-console.log("updates");
+//console.log("updates");
 var temp_nodes = [];
 for(var i = 0; i < graph.nodes.length; i++) {
   temp_nodes.push([graph.nodes[i].id,1]);
