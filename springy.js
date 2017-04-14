@@ -409,30 +409,90 @@
 
 
 	// Physics stuff
+Graph.prototype.update_temporality = function() {
+
+var temp_nodes = [];
+for(var i = 0; i < graph.nodes.length; i++) {
+  temp_nodes.push([graph.nodes[i].id,1]);
+}
+for(var i = 0; i < temp_nodes.length; i++) {
+  for(var g = 0; g < graph.edges.length; g++) {
+    if (graph.edges[g].target.id == temp_nodes[i][0]) {
+      temp_nodes[i][1] = 0;
+    }
+ }
+}
+for(var i = 0; i < temp_nodes.length; i++) {
+  temp_nodes[i].push(0);
+  for(var g = 0; g < temp_nodes.length; g++) {
+    if (temp_nodes[g][1] > 0) {
+      for(var h = 0; h < graph.edges.length; h++) {
+        if (graph.edges[h].source.id == temp_nodes[g][0] & graph.edges[h].target.id == temp_nodes[i][0]) {
+          temp_nodes[i][2] = temp_nodes[i][2] + 1; 
+        }
+      }
+    }
+  }
+}
+var stop = 1;
+var omgang = 2;
+while (stop > 0) {
+ omgang = omgang + 1;
+for(var i = 0; i < temp_nodes.length; i++) {
+  temp_nodes[i].push(0);
+  for(var g = 0; g < temp_nodes.length; g++) {
+    if (temp_nodes[g][omgang-1] > 0) {
+      for(var h = 0; h < graph.edges.length; h++) {
+        if (graph.edges[h].source.id == temp_nodes[g][0] & graph.edges[h].target.id == temp_nodes[i][0]) {
+          temp_nodes[i][omgang] = temp_nodes[i][omgang] + 1 + temp_nodes[g][omgang-1]; 
+        }
+      }
+    }
+  }
+}
+  stop = 0;
+for(var i = 0; i < temp_nodes.length; i++) {
+  stop = stop + temp_nodes[i][omgang];
+}
+}
+window.temporality_table = [];
+for(var i = 0; i < temp_nodes.length; i++) {
+  temporality_table.push([temp_nodes[i][0],0]);
+  for(var g = 2; g < temp_nodes[i].length; g++) {
+    temporality_table[i][1] = temporality_table[i][1] + temp_nodes[i][g];
+}
+}
+var ranking_of_temp = [];
+for(var i = 0; i < temporality_table.length; i++) {
+  ranking_of_temp[i] = temporality_table[i][1];
+}
+ranking_of_temp = Array.from(new Set(ranking_of_temp));
+ranking_of_temp = ranking_of_temp.sort();
+for(var i = 0; i < temporality_table.length; i++) {
+  for(var g = 0; g < ranking_of_temp.length; g++) {
+    if (temporality_table[i][1] == ranking_of_temp[g]){
+      temporality_table[i].push(g);
+  }
+  }
+}
+}
 
 	Layout.ForceDirected.prototype.applyTemporality = function() {
 		this.eachNode(function(n1, point1) {
 	 		this.eachNode(function(n2, point2) {
 			var temporal_cause = 0;
-			for (var i = 0; i < graph.edges.length; i++) {
-			 if (n1.id == graph.edges[i].target.id) {
-			 	var temporal_cause = temporal_cause + 1;
+			for (var i = 0; i < temporality_table.length; i++) {
+			 if (n1.id == temporality_table[i][0]) {
+			 	var temporal_cause = temporality_table[i][2];
 			 }
 			}
-			//if (n1.id == "Birth defects") {
-			// 	if (temporal_cause == 1) {
-					console.log(n1.id);
 					var d = point1.p.subtract(point2.p);
-					//console.log(d.x);
 					var distance = d.magnitude() + 0.1; // avoid massive forces at small distances (and divide by zero)
 					var direction = d.normalise();
-					direction.x = (direction.x - 1 + temporal_cause)*2;
-					//console.log(direction);
+					direction.x = (direction.x + temporal_cause)*1.5;
 					// apply force to each end point
 					point1.applyForce(direction.multiply(this.repulsion).divide(distance * distance * 0.5));
 					point2.applyForce(direction.multiply(this.repulsion).divide(distance * distance * -0.5));
-			//};
-
 		});
 		});
 	};
