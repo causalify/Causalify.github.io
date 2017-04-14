@@ -457,7 +457,7 @@ for(var i = 0; i < temp_nodes.length; i++) {
   stop = stop + temp_nodes[i][omgang];
 }
 }
-window.temp_nodes_global = temp_nodes;
+var temp_nodes_global = temp_nodes;
 window.temporality_table = [];
 for(var i = 0; i < temp_nodes.length; i++) {
   temporality_table.push([temp_nodes[i][0],0]);
@@ -481,6 +481,7 @@ for(var i = 0; i < temporality_table.length; i++) {
 }
 
 window.temporality_table = [];
+window.ranking_of_temp = [];
 
 setInterval(function() {
 update_temporality();
