@@ -507,7 +507,7 @@ document.getElementById('ys_list').innerHTML = options;
 
 
 function update(){
-  graph.update_temporality();
+ // graph.update_temporality();
 //  save_undo();
   var author = document.getElementById('author').value
   var x = document.getElementById('x').value
@@ -518,7 +518,7 @@ function update(){
   graph.addNodes(y);
 graph.addEdges([x,y,{color: col,label: author, strength: strength_local}]);
 option_update();
-  graph.update_temporality();
+ // graph.update_temporality();
 save();
 //document.getElementById('undo_button').style.visibility = "visible";
 }
@@ -666,14 +666,14 @@ localStorage.setItem("stored_targets_undo", JSON.stringify(target_list));
 */
 
 function loadlastsession() {
-graph.update_temporality();
+//graph.update_temporality();
 // nodes
 if (localStorage.getItem("stored_nodes") !== null) {
   var nodes_list = JSON.parse( localStorage.getItem("stored_nodes") );
 for (var i = 0; i < nodes_list.length; i++) {
 graph.addNodes(nodes_list[i]);
 }
-graph.update_temporality();
+//graph.update_temporality();
 }
 // edges
 if (localStorage.getItem("stored_sources") !== null & localStorage.getItem("stored_targets") !== null) {
@@ -700,7 +700,7 @@ closebox();
 function example() {
 closebox()
 // nodes
-update_temporality();
+//graph.update_temporality();
 setTimeout(function() {graph.addNodes("Antiepileptic drugs");}, 100);
 setTimeout(function() {graph.addNodes("Plasma folate levels");},500);
 setTimeout(function() {graph.addEdges(["Antiepileptic drugs","Plasma folate levels",{color: '#CC333F',label: 'Hernán et al. 2002', strength: 2}]); },1300);
@@ -714,7 +714,7 @@ setTimeout(function() {graph.addEdges(["Alcohol intake","Birth defects",{color: 
 // update options
 setTimeout(function() {option_update();},5050);
 //#### after loading
-setTimeout(function() {update_temporality();},5100);
+//setTimeout(function() {graph.update_temporality();},5100);
 }
 
 
@@ -831,7 +831,7 @@ function getAsText(fileToRead) {
 }
 
 function loadHandler(event) {
-  graph.update_temporality();
+ // graph.update_temporality();
   var csv = event.target.result;
   processData(csv);             
 }
@@ -876,7 +876,7 @@ option_update();
 //#### after loading
 closebox();
 save();
-graph.update_temporality();
+//graph.update_temporality();
 }
 
 function errorHandler(evt) {

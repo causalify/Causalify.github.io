@@ -409,8 +409,9 @@
 
 
 	// Physics stuff
-window.update_temporality = function() {
-
+	// Update temporality
+setInterval(function() {
+console.log("updates");
 var temp_nodes = [];
 for(var i = 0; i < graph.nodes.length; i++) {
   temp_nodes.push([graph.nodes[i].id,1]);
@@ -475,7 +476,9 @@ for(var i = 0; i < temporality_table.length; i++) {
   }
   }
 }
-}
+},2000);
+
+window.temporality_table = [];
 
 	Layout.ForceDirected.prototype.applyTemporality = function() {
 		this.eachNode(function(n1, point1) {
