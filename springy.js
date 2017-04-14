@@ -143,6 +143,7 @@
 
 			this.newEdge(node1, node2, attr);
 		}
+update_temporality();
 	};
 
 	Graph.prototype.newNode = function(data) {
@@ -483,9 +484,9 @@ for(var i = 0; i < temporality_table.length; i++) {
 window.temporality_table = [];
 window.ranking_of_temp = [];
 
-setInterval(function() {
-update_temporality();
-},5000);
+//setInterval(function() {
+//update_temporality();
+//},5000);
 
 
 	Layout.ForceDirected.prototype.applyTemporality = function() {
