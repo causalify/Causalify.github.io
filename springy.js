@@ -457,6 +457,7 @@ for(var i = 0; i < temp_nodes.length; i++) {
   stop = stop + temp_nodes[i][omgang];
 }
 }
+window.temp_nodes_global = temp_nodes;
 window.temporality_table = [];
 for(var i = 0; i < temp_nodes.length; i++) {
   temporality_table.push([temp_nodes[i][0],0]);
@@ -464,12 +465,12 @@ for(var i = 0; i < temp_nodes.length; i++) {
     temporality_table[i][1] = temporality_table[i][1] + temp_nodes[i][g];
 }
 }
-var ranking_of_temp = [];
+window.ranking_of_temp = [];
 for(var i = 0; i < temporality_table.length; i++) {
   ranking_of_temp[i] = temporality_table[i][1];
 }
 ranking_of_temp = Array.from(new Set(ranking_of_temp));
-ranking_of_temp = ranking_of_temp.sort();
+ranking_of_temp = ranking_of_temp.sort(function(a,b){return a - b});
 for(var i = 0; i < temporality_table.length; i++) {
   for(var g = 0; g < ranking_of_temp.length; g++) {
     if (temporality_table[i][1] == ranking_of_temp[g]){
