@@ -482,7 +482,6 @@ for(var i = 0; i < temporality_table.length; i++) {
 window.temporality_table = [];
 
 setInterval(function() {
-console.log("updates");
 update_temporality();
 },2000);
 
