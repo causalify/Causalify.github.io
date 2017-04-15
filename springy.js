@@ -263,6 +263,7 @@ update_temporality();
 		}
 
 		this.notify();
+		update_temporality();
 	};
 
 	/* Merge a list of nodes and edges into the current graph. eg.
