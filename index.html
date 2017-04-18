@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<script>console.log("version 2")</script>
+<script>console.log("version 2.5")</script>
 <head>
 <title>Causalify - a tool for causal assumptions in research.</title>
 <link rel="shortcut icon" href="favicon.ico" />
@@ -454,6 +454,8 @@ with [low]
 <button class='button_drop' id='remove_to9' style  = "display:none" onclick="removing_edges_to(9)"></button>
 <button class='button_drop' id='remove_to10' style  = "display:none" onclick="removing_edges_to(10)"></button>
 
+<font id='temp_ignored' style  = "visibility:hidden"  size = "2" face="Helvetica" color = "red"><b>Cyclic structure added thus temporality is ignored</b></font> 
+
 </header>
 <article class="article">
 
@@ -554,9 +556,20 @@ function timerfunction() {
 }}, 7000);
 }
 
+function temp_ignored_timer() {
+    timer =   setTimeout( function() {
+  document.getElementById('temp_ignored').style.visibility = "hidden";
+}, 7000);
+}
+
 function timerstopfunction() {
     clearTimeout(timer);
 }
+
+
+
+
+
 
 jQuery(function(){
   var springy = window.springy = jQuery('#springydemo').springy({
