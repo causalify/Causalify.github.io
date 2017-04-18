@@ -441,7 +441,8 @@ for(var i = 0; i < temp_nodes.length; i++) {
 var stop = 1;
 var omgang = 2;
 while (stop > 0) {
- omgang = omgang + 1;
+console.log(omgang);
+omgang = omgang + 1;
 for(var i = 0; i < temp_nodes.length; i++) {
   temp_nodes[i].push(0);
   for(var g = 0; g < temp_nodes.length; g++) {
@@ -457,6 +458,9 @@ for(var i = 0; i < temp_nodes.length; i++) {
   stop = 0;
 for(var i = 0; i < temp_nodes.length; i++) {
   stop = stop + temp_nodes[i][omgang];
+}
+if (omgang > 1000) {
+	stop = 0;
 }
 }
 var temp_nodes_global = temp_nodes;
