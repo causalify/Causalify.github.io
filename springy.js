@@ -603,7 +603,7 @@ window.ranking_of_temp = [];
 		if (onRenderStart !== undefined) { onRenderStart(); }
 
 		Springy.requestAnimationFrame(function step() {
-			t.tick(.005);
+			t.tick(.03);
 
 			if (render !== undefined) {
 				render();
@@ -625,8 +625,8 @@ window.ranking_of_temp = [];
 
 	Layout.ForceDirected.prototype.tick = function(timestep) {
 		this.applyTemporality();
-		this.applyCoulombsLaw();
-		this.applyHookesLaw();
+		//this.applyCoulombsLaw();
+		//this.applyHookesLaw();
 		this.attractToCentre();
 		this.updateVelocity(timestep);
 		this.updatePosition(timestep);
