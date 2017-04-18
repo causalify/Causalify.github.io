@@ -461,6 +461,7 @@ for(var i = 0; i < temp_nodes.length; i++) {
 }
 if (omgang > 1000) {
 	stop = 0;
+	document.getElementById("remove_node").style.visibility = "visible";
 }
 }
 var temp_nodes_global = temp_nodes;
