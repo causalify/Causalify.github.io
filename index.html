@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<script>console.log("version 2.5")</script>
+<script>console.log("version 2.6")</script>
 <head>
 <title>Causalify - a tool for causal assumptions in research.</title>
 <link rel="shortcut icon" href="favicon.ico" />
@@ -622,6 +622,7 @@ document.getElementById("remove_from"+i).style.display = "none";
 document.getElementById("remove_to"+i).style.display = "none";
 }
 save();
+option_update();
 }
 
 function removing_edges_to (num){
@@ -630,6 +631,7 @@ function removing_edges_to (num){
       graph.removeEdge(graph.edges[i]);
 }}
 save();
+option_update();
 }
 
 function removing_edges_from (num){
@@ -638,6 +640,7 @@ function removing_edges_from (num){
       graph.removeEdge(graph.edges[i]);
 }}
 save();
+option_update();
 }
 
 
