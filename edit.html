@@ -1,0 +1,119 @@
+<style type="text/css">
+.button_drop_red {
+    background-color: #CC333F;
+    color: black;
+    border-radius: 4px;
+    border: 1px solid #CC333F;
+    transition-duration: 0.4s;
+      cursor: pointer;
+        padding: 20px;
+
+}
+
+.button_drop_red:hover {
+    color: white;
+}
+
+
+
+</style>
+
+
+
+<script type="text/javascript">
+if (localStorage.getItem("stored_sources") !== null & localStorage.getItem("stored_targets") !== null) {
+var author_list = JSON.parse( localStorage.getItem("stored_authors") );
+var source_list = JSON.parse( localStorage.getItem("stored_sources") );
+var target_list = JSON.parse( localStorage.getItem("stored_targets") );
+var color_list = JSON.parse( localStorage.getItem("stored_colors") );
+var strength_list = JSON.parse( localStorage.getItem("stored_strength") );
+}
+var data = [];
+for (var i = 0; i < source_list.length; i++) {
+    if (color_list[i] === '#7DBE3C') {var direct = 0;}
+    if (color_list[i] === '#CC333F') {var direct = 1;}
+    if (color_list[i] === '#808080') {var direct = 2;}
+data.push( { "Author": author_list[i], "Exposure": source_list[i], "Outcome": target_list[i], "Direction": direct,"Strength": Math.round(strength_list[i]*100,2)/100,  });
+}
+console.log(data);
+
+
+function save() {
+var nodes_list = [];
+var source_list = [];
+var target_list = [];
+var color_list  = [];
+var author_list = [];
+var strength_list = [];
+for (var i = 0; i < data.length; i++) {
+    if (data[i].Direction === 0 ) {var direct = '#7DBE3C';}
+    if (data[i].Direction === 1 ) {var direct = '#CC333F';}
+    if (data[i].Direction === 2 ) {var direct = '#808080';}
+nodes_list.push(data[i].Exposure);
+nodes_list.push(data[i].Outcome);
+author_list.push(data[i].Author);
+source_list.push(data[i].Exposure);
+target_list.push(data[i].Outcome);
+color_list.push(direct);
+strength_list.push(data[i].Strength);
+}
+localStorage.setItem("stored_nodes", JSON.stringify(nodes_list));
+localStorage.setItem("stored_sources", JSON.stringify(source_list));
+localStorage.setItem("stored_targets", JSON.stringify(target_list));
+localStorage.setItem("stored_colors", JSON.stringify(color_list));
+localStorage.setItem("stored_authors", JSON.stringify(author_list));
+localStorage.setItem("stored_strength", JSON.stringify(strength_list));
+var d = new Date();
+var n = d.getTime();
+localStorage.setItem("edit_time", JSON.stringify(n));
+location.href='index.html'
+}
+
+
+
+</script>
+
+
+
+
+
+<script type="text/javascript" src="jsgrid/jquery-1.8.3.min.js"></script>
+<link type="text/css" rel="stylesheet" href="jsgrid/jsgrid.min.css" />
+<link type="text/css" rel="stylesheet" href="jsgrid/jsgrid-theme.min.css" />
+<script type="text/javascript" src="jsgrid/jsgrid.min.js"></script>
+
+
+<div align="center"> <img src="causalify_logo_small.png"> </div>
+<br> <div align="right"><font color='#CC333F'><i>Remember to accept changes below</i></font></div>
+<div id="jsGrid"></div>
+
+<script>
+  
+    $("#jsGrid").jsGrid({
+        width: "100%",
+        height: "75%",
+ 
+        inserting: true,
+        editing: true,
+        sorting: true,
+        paging: true,
+        selecting: true,
+ 
+        data: data,
+ 
+        fields: [
+            { name: "Author", type: "text", width: 150},
+            { name: "Exposure", type: "text", width: 150 },
+            { name: "Outcome", type: "text", width: 150 },
+     //       { name: "Direction", type: "select", width:150 },
+            { name: "Direction", type: "select", items: ["Increase", "Decrease", "No effect"], width:150 },
+            { name: "Strength", type: "number", width: 150 },
+            { type: "control" }
+        ]
+    })  ;
+
+</script>
+<div align="center">
+<button onclick="save();" class='button_drop_red' type="button"> <b> Save and return </b> </button>
+</div>
+
